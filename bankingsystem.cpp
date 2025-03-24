@@ -141,20 +141,38 @@ int main() {
                 int accNum;
                 string name;
                 double balance, interestRate;
-                cout << "Enter Account Number, Name, Initial Balance, Interest Rate: ";
-                cin >> accNum >> balance >> interestRate;
-               cout << "Name:";
-               cin>>name;
+                cout << "Enter Account Number ";
+                cin >> accNum; 
+                cout << "Name:";
+                cin>>name;
+                cout << "Initial Balance:";
+                cin>>balance;
+                cout << "Interest Rate:";
+                cin>>interestRate;
+
                 accounts.push_back(new SavingsAccount(accNum, name, balance, interestRate));
                 cout << "Savings Account Created Successfully!\n";
                 break;
             }
             case 2: {
+               
                 int accNum;
                 string name;
                 double balance, overdraftLimit;
-                cout << "Enter Account Number, Name, Initial Balance, Overdraft Limit: ";
-                cin >> accNum >> name >> balance >> overdraftLimit;
+                cout << "Enter Account Number ";
+                cin >> accNum; 
+                cout << "Name:";
+                cin>>name;
+                cout << "Initial Balance:";
+                cin>>balance;
+                cout << " Overdraft Limit:";
+                cin>>overdraftLimit;
+
+
+
+
+
+
                 accounts.push_back(new CheckingAccount(accNum, name, balance, overdraftLimit));
                 cout << "Checking Account Created Successfully!\n";
                 break;
