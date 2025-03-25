@@ -2,7 +2,6 @@
 #include <vector>
 using namespace std;
 
-// Base Class: BankAccount
 class BankAccount {
 protected:
     int accountNumber;
@@ -16,7 +15,7 @@ public:
     virtual void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
-            cout << "Deposited: $" << amount << " | New Balance: $" << balance << endl;
+            cout << "Deposited: " << amount << " | New Balance: " << balance << endl;
         } else {
             cout << "Invalid deposit amount!" << endl;
         }
@@ -25,7 +24,7 @@ public:
     virtual void withdraw(double amount) {
         if (amount > 0 && amount <= balance) {
             balance -= amount;
-            cout << "Withdrawn: $" << amount << " | Remaining Balance: $" << balance << endl;
+            cout << "Withdrawn: " << amount << " | Remaining Balance: " << balance << endl;
         } else {
             cout << "Insufficient funds or invalid amount!" << endl;
         }
@@ -38,15 +37,14 @@ public:
     virtual void displayAccountInfo() const {
         cout << "Account Number: " << accountNumber << endl;
         cout << "Holder Name: " << accountHolderName << endl;
-        cout << "Balance: $" << balance << endl;
+        cout << "Balance: " << balance << endl;
     }
 
-    virtual void calculateInterest() {}  // To be overridden in derived classes
-
+    virtual void calculateInterest() {}  
     virtual ~BankAccount() {}
 };
 
-// Derived Class: SavingsAccount
+
 class SavingsAccount : public BankAccount {
 private:
     double interestRate;
@@ -58,7 +56,7 @@ public:
     void calculateInterest() override {
         double interest = balance * (interestRate / 100);
         balance += interest;
-        cout << "Interest added: $" << interest << " | New Balance: $" << balance << endl;
+        cout << "Interest added: " << interest << " | New Balance: " << balance << endl;
     }
 
     void displayAccountInfo() const override {
@@ -67,7 +65,7 @@ public:
     }
 };
 
-// Derived Class: CheckingAccount
+
 class CheckingAccount : public BankAccount {
 private:
     double overdraftLimit;
@@ -79,7 +77,7 @@ public:
     void withdraw(double amount) override {
         if (amount > 0 && (balance + overdraftLimit) >= amount) {
             balance -= amount;
-            cout << "Withdrawn: $" << amount << " | Remaining Balance: $" << balance << endl;
+            cout << "Withdrawn: " << amount << " | Remaining Balance: " << balance << endl;
         } else {
             cout << "Overdraft limit exceeded!" << endl;
         }
@@ -87,11 +85,11 @@ public:
 
     void displayAccountInfo() const override {
         BankAccount::displayAccountInfo();
-        cout << "Overdraft Limit: $" << overdraftLimit << endl;
+        cout << "Overdraft Limit: " << overdraftLimit << endl;
     }
 };
 
-// Derived Class: FixedDepositAccount
+
 class FixedDepositAccount : public BankAccount {
 private:
     int termMonths;
@@ -104,7 +102,7 @@ public:
     void calculateInterest() override {
         double interest = balance * (interestRate / 100) * (termMonths / 12.0);
         balance += interest;
-        cout << "Fixed Deposit Interest Added: $" << interest << " | New Balance: $" << balance << endl;
+        cout << "Fixed Deposit Interest Added: " << interest << " | New Balance: " << balance << endl;
     }
 
     void displayAccountInfo() const override {
@@ -114,7 +112,7 @@ public:
     }
 };
 
-// Menu-driven system
+
 void displayMenu() {
     cout << "\n--- Banking System Menu ---\n";
     cout << "1. Create Savings Account\n";
@@ -181,8 +179,22 @@ int main() {
                 int accNum, term;
                 string name;
                 double balance, interestRate;
-                cout << "Enter Account Number, Name, Initial Balance, Term (months), Interest Rate: ";
-                cin >> accNum >> name >> balance >> term >> interestRate;
+                cout << "Enter Account Number ";
+                cin >> accNum; 
+                cout << "Name:";
+                cin>>name;
+                cout << "Initial Balance:";
+                cin>>balance;
+                cout << " Term (months):";
+                cin>>term ;
+                cout << " Interest Rate:";
+                cin>> interestRate;
+
+
+
+
+
+                
                 accounts.push_back(new FixedDepositAccount(accNum, name, balance, term, interestRate));
                 cout << "Fixed Deposit Account Created Successfully!\n";
                 break;
@@ -228,7 +240,7 @@ int main() {
         }
     } while (choice != 8);
 
-    // Cleanup dynamically allocated memory
+
     for (auto& acc : accounts) {
         delete acc;
     }
